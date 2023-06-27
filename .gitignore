@@ -1,6 +1,6 @@
 
 ###> symfony/framework-bundle ###
-/.env
+
 /.env.test
 /.env.local
 /.env.local.php
@@ -20,3 +20,5 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+/studentscard.sql
