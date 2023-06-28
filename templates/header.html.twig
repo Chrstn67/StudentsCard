@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('./Assets/CSS/styles.css') }}" />
+
+    <title>Students Card</title>
+</head>
+<body>
+<header>
+  <h1>Students Card</h1>
+</header>
+<nav>
+
+  <ul id="menu">
+    <li><a href="{{ path('app_classe') }}">Classes</a></li>
+    <li><a href="{{ path('app_eleve') }}">Eleves</a></li>
+    <li><a href="{{ path('app_interro') }}">Interrogations</a></li>
+    <li><a href="{{ path('app_prof') }}">Profs</a></li>
+    <li><a href="{{ path('app_matiere') }}">Matières</a></li>
+  </ul>
+</nav>
+
+    
+
+    {% block content %}{% endblock %}
+</body>
+</html>
