@@ -17,8 +17,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    {# <th>Id</th> #}
+                    <th>Matière</th>
                     <th>Libellé</th>
+                    <th>Elève</th>
                     <th>Note</th>
                     <th>Coefficient</th>
                     <th>Actions</th>
@@ -27,13 +29,15 @@
             <tbody>
                 {% for interro in interros %}
                     <tr>
-                        <td>{{ interro.id }}</td>
+                        {# <td>{{ interro.id }}</td> #}
+                        <td>{{ interro.matiere }}</td>
                         <td>{{ interro.libelleInterro }}</td>
+                        <td>{{ interro.eleve}}</td>
                         <td>{{ interro.note }}</td>
                         <td>{{ interro.coefficient }}</td>
                         <td>
-                            <a href="{{ path('interro_edit', {'id': interro.id}) }}" class="button">Modifier</a>
-                            <form action="{{ path('interro_delete', {'id': interro.id}) }}" method="post" style="display: inline-block;">
+                            <a href="{{ path('app_interro_edit', {'id': interro.id}) }}" class="button">Modifier</a>
+                            <form action="{{ path('app_interro_delete', {'id': interro.id}) }}" method="post" style="display: inline-block;">
                                 <input type="hidden" name="_method" value="POST">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ interro.id) }}">
                                 <button type="submit" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette interro ?')">Supprimer</button>

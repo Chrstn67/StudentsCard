@@ -30,7 +30,7 @@
                         <td>{{ classe.nom }}</td>
                         <td>
                             {% for prof in classe.prof %}
-                                {{ prof.nom_prof }}{% if not loop.last %}, {% endif %}
+                                {{ prof.getNomProf() }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </td>
                         <td>

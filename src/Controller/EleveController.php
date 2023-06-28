@@ -4,34 +4,32 @@ namespace App\Controller;
 
 use App\Entity\Eleve;
 use App\Form\EleveType;
-use App\Repository\EleveRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/eleve')]
 class EleveController extends AbstractController
 {
-    #[Route('/', name: 'app_eleve', methods: ['GET'])]
-    public function index(EleveRepository $eleveRepository): Response
+    #[Route('/eleve', name: 'app_eleve')]
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        $eleves = $eleveRepository->findAll();
+        $eleves = $entityManager->getRepository(Eleve::class)->findAll();
 
         return $this->render('eleve/index.html.twig', [
             'eleves' => $eleves,
         ]);
     }
 
-    #[Route('/create', name: 'app_eleve_create', methods: ['GET', 'POST'])]
-    public function create(Request $request): Response
+    #[Route('/eleve/create', name: 'app_eleve_create')]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $eleve = new Eleve();
         $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($eleve);
             $entityManager->flush();
 
@@ -43,14 +41,14 @@ class EleveController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'app_eleve_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Eleve $eleve): Response
+    #[Route('/eleve/edit/{id}', name: 'app_eleve_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, Eleve $eleve): Response
     {
         $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_eleve');
         }
@@ -60,14 +58,11 @@ class EleveController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_eleve_delete', methods: ['POST'])]
-    public function delete(Request $request, Eleve $eleve): Response
+    #[Route('/eleve/delete/{id}', name: 'app_eleve_delete')]
+    public function delete(Request $request, EntityManagerInterface $entityManager, Eleve $eleve): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $eleve->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($eleve);
-            $entityManager->flush();
-        }
+        $entityManager->remove($eleve);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_eleve');
     }
