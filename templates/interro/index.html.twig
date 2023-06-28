@@ -1,20 +1,51 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('Assets/CSS/styles.css') }}" />
 
-{% block title %}Hello InterroController!{% endblock %}
+    <title>Liste des interros</title>
+</head>
+<body>
+    {% include 'header.html.twig' %}
+  
+    <div class="container">
+        <h1>Liste des interros</h1>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Libellé</th>
+                    <th>Note</th>
+                    <th>Coefficient</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for interro in interros %}
+                    <tr>
+                        <td>{{ interro.id }}</td>
+                        <td>{{ interro.libelleInterro }}</td>
+                        <td>{{ interro.note }}</td>
+                        <td>{{ interro.coefficient }}</td>
+                        <td>
+                            <a href="{{ path('interro_edit', {'id': interro.id}) }}" class="button">Modifier</a>
+                            <form action="{{ path('interro_delete', {'id': interro.id}) }}" method="post" style="display: inline-block;">
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ interro.id) }}">
+                                <button type="submit" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette interro ?')">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <a href="{{ path('app_interro_create') }}" class="button">Créer une interro</a>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/MesSites/students-card/src/Controller/InterroController.php'|file_link(0) }}">src/Controller/InterroController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/MesSites/students-card/templates/interro/index.html.twig'|file_link(0) }}">templates/interro/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+</body>
+</html>

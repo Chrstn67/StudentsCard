@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('Assets/CSS/styles.css') }}" />
+
+    <title>Création d'une matière</title>
+</head>
+<body>
+    {% include 'header.html.twig' %}
+  
+    <div class="container">
+        <h1>Création d'une matière</h1>
+
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prof) }}
+
+        <button type="submit" class="button">Créer</button>
+        <a href="{{ path('app_matiere') }}" class="button">Retour</a>
+
+        {{ form_end(form) }}
+    </div>
+
+
+</body>
+</html>

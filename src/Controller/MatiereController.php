@@ -2,17 +2,68 @@
 
 namespace App\Controller;
 
+use App\Entity\Matiere;
+use App\Form\MatiereType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MatiereController extends AbstractController
 {
     #[Route('/matiere', name: 'app_matiere')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $matieres = $entityManager->getRepository(Matiere::class)->findAll();
+
         return $this->render('matiere/index.html.twig', [
-            'controller_name' => 'MatiereController',
+            'matieres' => $matieres,
         ]);
+    }
+
+    #[Route('/matiere/create', name: 'app_matiere_create')]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $matiere = new Matiere();
+        $form = $this->createForm(MatiereType::class, $matiere);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($matiere);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_matiere');
+        }
+
+        return $this->render('matiere/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/matiere/edit/{id}', name: 'app_matiere_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, Matiere $matiere): Response
+    {
+        $form = $this->createForm(MatiereType::class, $matiere);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_matiere');
+        }
+
+        return $this->render('matiere/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/matiere/delete/{id}', name: 'app_matiere_delete')]
+    public function delete(Request $request, EntityManagerInterface $entityManager, Matiere $matiere): Response
+    {
+        $entityManager->remove($matiere);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_matiere');
     }
 }

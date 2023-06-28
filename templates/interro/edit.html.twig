@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('Assets/CSS/styles.css') }}" />
+
+    <title>Modification de l'interro</title>
+</head>
+<body>
+    {% include 'header.html.twig' %}
+  
+    <div class="container">
+        <h1>Modification de l'interro</h1>
+
+        {{ form_start(form) }}
+        {{ form_row(form.libelleInterro) }}
+        {{ form_row(form.note) }}
+        {{ form_row(form.coefficient) }}
+
+        <button type="submit" class="button">Modifier</button>
+        <a href="{{ path('app_interro') }}" class="button">Retour</a>
+
+        {{ form_end(form) }}
+    </div>
+
+
+</body>
+</html>
