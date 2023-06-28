@@ -20,7 +20,7 @@ class ClasseType extends AbstractType
             ])
             ->add('prof', EntityType::class, [
                 'class' => Prof::class,
-                'choice_label' => 'nom',
+                'choice_label' => 'nom_prof',
                 'multiple' => true,
                 'label' => 'Professeurs'
             ]);

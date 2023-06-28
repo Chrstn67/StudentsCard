@@ -17,7 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    {# <th>ID</th> #}
                     <th>Nom</th>
                     <th>Professeurs</th>
                     <th>Actions</th>
@@ -26,11 +26,11 @@
             <tbody>
                 {% for classe in classes %}
                     <tr>
-                        <td>{{ classe.id }}</td>
+                        {# <td>{{ classe.id }}</td> #}
                         <td>{{ classe.nom }}</td>
                         <td>
                             {% for prof in classe.prof %}
-                                {{ prof.nom }}{% if not loop.last %}, {% endif %}
+                                {{ prof.nom_prof }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </td>
                         <td>

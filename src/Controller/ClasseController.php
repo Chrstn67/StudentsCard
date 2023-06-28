@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Classe;
 use App\Form\ClasseType;
 use App\Repository\ClasseRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClasseController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/classe', name: 'app_classe')]
     public function index(ClasseRepository $classeRepository): Response
     {
@@ -30,9 +38,8 @@ class ClasseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($classe);
-            $entityManager->flush();
+            $this->entityManager->persist($classe);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_classe');
         }
@@ -49,7 +56,7 @@ class ClasseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_classe');
         }
@@ -62,9 +69,8 @@ class ClasseController extends AbstractController
     #[Route('/classe/delete/{id}', name: 'app_classe_delete')]
     public function delete(Request $request, Classe $classe): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($classe);
-        $entityManager->flush();
+        $this->entityManager->remove($classe);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('app_classe');
     }

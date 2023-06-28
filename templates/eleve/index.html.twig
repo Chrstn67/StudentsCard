@@ -17,7 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    {# <th>Id</th> #}
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Date de naissance</th>
@@ -28,7 +28,7 @@
             <tbody>
                 {% for eleve in eleves %}
                     <tr>
-                        <td>{{ eleve.id }}</td>
+                        {# <td>{{ eleve.id }}</td> #}
                         <td>{{ eleve.nom }}</td>
                         <td>{{ eleve.prenom }}</td>
                         <td>{{ eleve.naissance|date('d/m/Y') }}</td>
