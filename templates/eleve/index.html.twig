@@ -34,8 +34,8 @@
                         <td>{{ eleve.naissance|date('d/m/Y') }}</td>
                         <td>{{ eleve.classe.nom }}</td>
                         <td>
-                            <a href="{{ path('app_eleve_edit', {'id': eleve.id}) }}" class="button">Modifier</a>
-                            <a href="{{ path('app_eleve_delete', {'id': eleve.id}) }}" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève ?')">Supprimer</a>
+                            <a href="{{ path('eleve_edit', {'id': eleve.id}) }}" class="button">Modifier</a>
+                            <a href="{{ path('eleve_delete', {'id': eleve.id}) }}" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève ?')">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
