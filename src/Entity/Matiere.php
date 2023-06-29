@@ -18,15 +18,14 @@ class Matiere
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Interro::class)]
-    private Collection $interro;
+
 
     #[ORM\ManyToMany(targetEntity: Prof::class)]
     private Collection $prof;
 
     public function __construct()
     {
-        $this->interro = new ArrayCollection();
+
         $this->prof = new ArrayCollection();
     }
 
@@ -47,29 +46,7 @@ class Matiere
         return $this;
     }
 
-    /**
-     * @return Collection<int, Interro>
-     */
-    public function getInterro(): Collection
-    {
-        return $this->interro;
-    }
 
-    public function addInterro(Interro $interro): static
-    {
-        if (!$this->interro->contains($interro)) {
-            $this->interro->add($interro);
-        }
-
-        return $this;
-    }
-
-    public function removeInterro(Interro $interro): static
-    {
-        $this->interro->removeElement($interro);
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Prof>
