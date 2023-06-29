@@ -22,7 +22,8 @@ class ClasseType extends AbstractType
                 'class' => Prof::class,
                 'choice_label' => 'nom_prof',
                 'multiple' => true,
-                'label' => 'Professeurs'
+                'label' => 'Professeurs',
+                'required' => false
             ]);
     }
 

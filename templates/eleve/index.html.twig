@@ -13,7 +13,10 @@
   
     <div class="container">
         <h1>Liste des élèves</h1>
-
+ <a href="{{ path('app_eleve_create') }}" class="button">Créer un nouvel élève</a>
+ <a href="{{ path('app_eleve', {'sort': 'nom'}) }}" class="button">Trier par nom</a>
+<a href="{{ path('app_eleve', {'sort': 'classe'}) }}" class="button">Trier par classe</a>
+ 
         <table class="table">
             <thead>
                 <tr>
@@ -42,9 +45,8 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_eleve_create') }}" class="button">Créer un nouvel élève</a>
-    </div>
-
+       
+   </div>
 
 </body>
 </html>

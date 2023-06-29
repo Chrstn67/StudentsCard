@@ -15,7 +15,7 @@ class MatiereController extends AbstractController
     #[Route('/matiere', name: 'app_matiere')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $matieres = $entityManager->getRepository(Matiere::class)->findAll();
+        $matieres = $entityManager->getRepository(Matiere::class)->findBy([], ['nom' => 'ASC']);
 
         return $this->render('matiere/index.html.twig', [
             'matieres' => $matieres,

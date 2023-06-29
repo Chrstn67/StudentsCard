@@ -11,13 +11,15 @@
 <body>
     {% include 'header.html.twig' %}
   
-    <div class="container">
+   <div class="container">
         <h1>Liste des professeurs</h1>
+        <a href="{{ path('app_prof_create') }}" class="button">Créer un professeur</a>
+
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    {# <th>ID</th> #}
                     <th>Nom</th>
                     <th>Classes</th>
                     <th>Matieres</th>
@@ -27,7 +29,7 @@
             <tbody>
                 {% for prof in profs %}
                     <tr>
-                        <td>{{ prof.id }}</td>
+                        {# <td>{{ prof.id }}</td> #}
                         <td>{{ prof.nomProf }}</td>
                         <td>
                             {% for classe in prof.classe %}
@@ -48,7 +50,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_prof_create') }}" class="button">Créer un professeur</a>
+      
     </div>
 
 

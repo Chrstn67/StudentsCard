@@ -16,7 +16,7 @@ class ProfController extends AbstractController
     #[Route('/prof', name: 'app_prof')]
     public function index(ProfRepository $profRepository): Response
     {
-        $profs = $profRepository->findAll();
+        $profs = $profRepository->findBy([], ['nom_prof' => 'ASC']);
 
         return $this->render('prof/index.html.twig', [
             'profs' => $profs,

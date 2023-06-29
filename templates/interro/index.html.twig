@@ -13,7 +13,7 @@
   
     <div class="container">
         <h1>Liste des interros</h1>
-
+  <a href="{{ path('app_interro_create') }}" class="button">Créer une interro</a>
         <table class="table">
             <thead>
                 <tr>
@@ -30,9 +30,14 @@
                 {% for interro in interros %}
                     <tr>
                         {# <td>{{ interro.id }}</td> #}
-                        <td>{{ interro.matiere }}</td>
+                        <td>{{ interro.matiere.nom }}</td>
                         <td>{{ interro.libelleInterro }}</td>
-                        <td>{{ interro.eleve}}</td>
+                       <td>
+            {% for eleve in interro.eleve %}
+                {{ eleve.nom }} {{ eleve.prenom }}
+                {% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </td>
                         <td>{{ interro.note }}</td>
                         <td>{{ interro.coefficient }}</td>
                         <td>
@@ -48,7 +53,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_interro_create') }}" class="button">Créer une interro</a>
+      
     </div>
 
 </body>

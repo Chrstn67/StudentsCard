@@ -13,14 +13,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class EleveController extends AbstractController
 {
     #[Route('/eleve', name: 'app_eleve')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $eleves = $entityManager->getRepository(Eleve::class)->findAll();
+        $sortBy = $request->query->get('sort');
+        $orderBy = 'nom';
+
+        if ($sortBy === 'classe') {
+            $orderBy = 'classe';
+        }
+
+        $eleves = $entityManager->getRepository(Eleve::class)->findBy([], [$orderBy => 'ASC']);
 
         return $this->render('eleve/index.html.twig', [
             'eleves' => $eleves,
         ]);
     }
+
 
     #[Route('/eleve/create', name: 'app_eleve_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response

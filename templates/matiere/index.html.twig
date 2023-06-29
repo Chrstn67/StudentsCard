@@ -13,11 +13,11 @@
   
     <div class="container">
         <h1>Liste des matières</h1>
-
+<a href="{{ path('app_matiere_create') }}" class="button">Créer une matière</a>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    {# <th>Id</th> #}
                     <th>Nom</th>
                     <th>Actions</th>
                 </tr>
@@ -25,7 +25,7 @@
             <tbody>
                 {% for matiere in matieres %}
                     <tr>
-                        <td>{{ matiere.id }}</td>
+                        {# <td>{{ matiere.id }}</td> #}
                         <td>{{ matiere.nom }}</td>
                         <td>
                             <a href="{{ path('app_matiere_edit', {'id': matiere.id}) }}" class="button">Modifier</a>
@@ -36,7 +36,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_matiere_create') }}" class="button">Créer une matière</a>
+        
     </div>
 
 

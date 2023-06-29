@@ -22,7 +22,7 @@ class MatiereType extends AbstractType
                 'required' => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer',
+                'label' => 'Modifier',
             ]);
     }
 

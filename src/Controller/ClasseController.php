@@ -23,7 +23,7 @@ class ClasseController extends AbstractController
     #[Route('/classe', name: 'app_classe')]
     public function index(ClasseRepository $classeRepository): Response
     {
-        $classes = $classeRepository->findAll();
+        $classes = $classeRepository->findBy([], ['nom' => 'ASC']);
 
         return $this->render('classe/index.html.twig', [
             'classes' => $classes,
