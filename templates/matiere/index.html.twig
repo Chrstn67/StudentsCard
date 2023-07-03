@@ -10,10 +10,10 @@
 </head>
 <body>
     {% include 'header.html.twig' %}
-  
+
     <div class="container">
         <h1>Liste des matières</h1>
-<a href="{{ path('app_matiere_create') }}" class="button">Créer une matière</a>
+        <a href="{{ path('app_matiere_create') }}" class="button">Créer une matière</a>
         <table class="table">
             <thead>
                 <tr>
@@ -29,16 +29,16 @@
                         <td>{{ matiere.nom }}</td>
                         <td>
                             <a href="{{ path('app_matiere_edit', {'id': matiere.id}) }}" class="button">Modifier</a>
-                            <a href="{{ path('app_matiere_delete', {'id': matiere.id}) }}" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?')">Supprimer</a>
+                            <form action="{{ path('app_matiere_delete', {'id': matiere.id}) }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
+                                <button type="submit" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?')">Supprimer</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        
     </div>
-
-
 </body>
 </html>

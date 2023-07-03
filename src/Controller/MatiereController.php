@@ -55,14 +55,17 @@ class MatiereController extends AbstractController
 
         return $this->render('matiere/edit.html.twig', [
             'form' => $form->createView(),
+            'matiere' => $matiere,
         ]);
     }
 
-    #[Route('/matiere/delete/{id}', name: 'app_matiere_delete')]
+    #[Route('/matiere/delete/{id}', name: 'app_matiere_delete', methods: ['DELETE'])]
     public function delete(Request $request, EntityManagerInterface $entityManager, Matiere $matiere): Response
     {
-        $entityManager->remove($matiere);
-        $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $matiere->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($matiere);
+            $entityManager->flush();
+        }
 
         return $this->redirectToRoute('app_matiere');
     }

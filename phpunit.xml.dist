@@ -5,21 +5,25 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="tests/bootstrap.php"
          convertDeprecationsToExceptions="false"
 >
     <php>
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
+         <server name="DATABASE_URL" value="mysql://root:root@127.0.0.1:3306/studentscard?serverVersion=mariadb-10.10.2" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+
     </php>
 
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
+            <exclude>tests/bootstrap.php</exclude>
+            <exclude>tests/Extensions</exclude>
         </testsuite>
     </testsuites>
 
@@ -34,5 +38,7 @@
     </listeners>
 
     <extensions>
-    </extensions>
+  
+</extensions>
+
 </phpunit>
